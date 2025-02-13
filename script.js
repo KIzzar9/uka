@@ -48,7 +48,7 @@ class Paper {
         }
         this.prevMouseX = this.mouseX;
         this.prevMouseY = this.mouseY;
-        paper.style.transform = `translateX(${this.currentPaperX}px) translateY(${this.currentPaperY}px) rotateZ(${this.rotation}deg)`;
+        paper.style.transform = `translateX(${this.currentPaperX}px) translateY(${this.currentPaperY}px) rotateZ(${this.rotation}deg) scale(${this.getScaleFactor()})`;
       }
     };
 
@@ -84,7 +84,12 @@ class Paper {
     window.addEventListener('mouseup', upHandler);
     window.addEventListener('touchend', upHandler);
   }
+
+  getScaleFactor() {
+    return window.innerWidth < 768 ? 0.5 : 1; // Scale down to 50% on mobile devices
+  }
 }
+
 const papers = Array.from(document.querySelectorAll('.paper'));
 papers.forEach(paper => {
   const p = new Paper();
